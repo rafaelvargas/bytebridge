@@ -2,7 +2,7 @@ import argparse
 
 
 def _execute_transfer_operation(args) -> None:
-    print("The passed arguments were:", args)
+    print("The named arguments were:", args)
 
 
 def main():

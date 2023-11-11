@@ -1,3 +1,28 @@
+[build-system]
+requires = ["flit"]
+build-backend = "flit.buildapi"
+
+[project]
+name = "bytebridge"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.7"
+authors = [
+    {name = "Rafael Vargas", email = "contact@rafaelvargas.dev"},
+]
+dynamic = ["version", "description"]
+dependencies = []
+
+
+[project.optional-dependencies]
+test = [
+    "ruff ==0.1.5",
+]
+
+[project.scripts] 
+bytebridge = "bytebridge.cli:main"
+
+
 [tool.ruff]
 select = ["ALL"]
 ignore = ["D100", "D104"]
