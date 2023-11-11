@@ -1,6 +1,13 @@
-# ByteBridge
 
-A data tool designed to move data seamlessly between various sources and destinations.
+
+
+<p align="center" style="padding: 20px">
+  <img src="static/branding/logo.svg" style="width:450px" alt="bytebridge">
+</p>
+
+<p align="center" style="padding-bottom: 20px">
+    <em>A data tool designed to move data seamlessly between various sources and destinations.</em>
+</p>
 
 ## Command Line Interface
 
