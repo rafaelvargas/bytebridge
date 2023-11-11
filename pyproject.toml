@@ -11,11 +11,13 @@ authors = [
     {name = "Rafael Vargas", email = "contact@rafaelvargas.dev"},
 ]
 dynamic = ["version", "description"]
-dependencies = []
+dependencies = [
+    "psycopg[binary] ==3.1.12",
+]
 
 
 [project.optional-dependencies]
-test = [
+dev = [
     "ruff ==0.1.5",
 ]
 

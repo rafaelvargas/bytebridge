@@ -41,3 +41,13 @@ bytebridge transfer
 | ORC              | File          |
 | Avro             | File          |
 | Excel (XLSX)     | File          |
+
+
+
+## Contributing
+
+Feel free to contribute to this project. See the contribution guidelines in [here](CONTRIBUTING.md).
+
+## License
+
+This project is licensed under the terms of the [Apache 2.0 license](LICENSE).
