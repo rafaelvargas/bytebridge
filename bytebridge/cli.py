@@ -1,7 +1,7 @@
 import argparse
 
 
-def _execute_transfer_operation(args):
+def _execute_transfer_operation(args) -> None:
     print("The passed arguments were:", args)
 
 
@@ -11,8 +11,16 @@ def main():
 
     transfer_parser = subparsers.add_parser("transfer", help="Transfer data operation")
     transfer_parser.add_argument("--source", required=True, help="Source data location")
-    transfer_parser.add_argument("--destination", required=True, help="Destination data location")
-    transfer_parser.add_argument("--query", required=True, help="Transformation query or script")
+    transfer_parser.add_argument(
+        "--destination",
+        required=True,
+        help="Destination data location",
+    )
+    transfer_parser.add_argument(
+        "--query",
+        required=True,
+        help="Transformation query or script",
+    )
     transfer_parser.add_argument("--map", required=True, help="Column mapping")
 
     args = parser.parse_args()
