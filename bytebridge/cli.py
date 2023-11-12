@@ -5,17 +5,18 @@ from .parsers import parse_json_file
 
 
 def _execute_transfer_operation(args: argparse.Namespace) -> None:
-    source_parameters = parse_json_file(args.source)
-    destination_parameters = parse_json_file(args.target)
+    connections = parse_json_file(args.connections)
+    source_connection = connections[args.source]
+    target_connection = connections[args.target]
     source_object = args.source_object
     query = args.source_query
     target = args.target_object
     batch_size = args.batch_size
     transfer(
-        source_parameters=source_parameters,
+        source_connection=source_connection,
         source_object=source_object,
         query=query,
-        destination_parameters=destination_parameters,
+        destination_connection=target_connection,
         target=target,
         batch_size=batch_size,
     )
@@ -24,9 +25,17 @@ def _execute_transfer_operation(args: argparse.Namespace) -> None:
 def main():
     parser = argparse.ArgumentParser(description="ByteBridge CLI")
     subparsers = parser.add_subparsers(dest="operation", title="Operations")
-
     transfer_parser = subparsers.add_parser("transfer", help="Transfer data operation")
-    transfer_parser.add_argument("--source", required=True, help="Source parameters")
+    transfer_parser.add_argument(
+        "--connections",
+        required=True,
+        help="Path the JSON with the connections definitions",
+    )
+    transfer_parser.add_argument(
+        "--source",
+        required=True,
+        help="The source name defined in the connections",
+    )
     transfer_parser.add_argument(
         "--source-query",
         required=False,
@@ -40,18 +49,18 @@ def main():
     transfer_parser.add_argument(
         "--target",
         required=True,
-        help="Destination parameters",
+        help="The target name defined in the connections.",
     )
     transfer_parser.add_argument(
         "--target-object",
         required=True,
-        help="The target of the destination (a table name or a filepath)",
+        help="The object to load data in the target (a table name or a filepath)",
     )
     transfer_parser.add_argument(
         "--batch-size",
         required=False,
         default=100,
-        help="The target of the destination (can be a table or a filepath)",
+        help="The size of batches used during the data transfer.",
     )
     args = parser.parse_args()
 

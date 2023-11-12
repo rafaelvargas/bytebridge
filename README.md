@@ -16,22 +16,26 @@ Bytebridge aims to have a CLI that can be used to easily transfer data from mult
 ### Parquet to PostgreSQL
 
 ```bash
-bytebridge transfer 
-    --source source.json  
-    --source-object data.parquet
-    --target destination.json
+bytebridge transfer \
+    --connections connections.json \
+    --source parquet_conn \
+    --source-object data.parquet \
+    --target postgresql_conn \
     --target-object bytebridge.public.data
 ```
 
+## API
+
+Coming soon.
 
 ## Data Interfaces
 
 ### Currently Supported
 
-| Name             | Type          |
-|----------------- | --------------|
-| PostgreSQL       | Database      |
-| Parquet          | File          |
+| Name             | Type          | Client                                           |
+|----------------- | --------------|--------------------------------------------------|
+| PostgreSQL       | Database      | [psycopg](https://pypi.org/project/psycopg/)     |
+| Parquet          | File          | [pyarrow](https://pypi.org/project/pyarrow/)     |
 
 
 

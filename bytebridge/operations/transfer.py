@@ -13,19 +13,19 @@ def transfer(
     *,
     query: str,
     source_object: str,
-    source_parameters,
+    source_connection,
     batch_size: int,
     target: str,
-    destination_parameters,
+    destination_connection,
 ):
-    batch_iterator = INTERFACES[source_parameters["type"]]["source"](
+    batch_iterator = INTERFACES[source_connection["type"]]["source"](
         query=query,
         source_object=source_object,
         batch_size=batch_size,
-        source_parameters=source_parameters,
+        source_parameters=source_connection.get("parameters"),
     )
-    INTERFACES[destination_parameters["type"]]["destination"](
-        destination_parameters=destination_parameters,
+    INTERFACES[destination_connection["type"]]["destination"](
+        destination_parameters=destination_connection.get("parameters"),
         target=target,
         batch_iterator=batch_iterator,
     )
