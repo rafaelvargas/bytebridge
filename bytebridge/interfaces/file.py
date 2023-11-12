@@ -3,9 +3,9 @@ from typing import Iterator, List
 import pyarrow
 from pyarrow import parquet
 
-
 def fetch(
     *,
+    connection_type: str,
     source_object: str,
     source_query: str,
     batch_size: int,
@@ -17,7 +17,9 @@ def fetch(
 
 
 def load(
-    *, target_object: str, batch_iterator: Iterator[dict], destination_parameters: str
+    *,
+    connection_type: str,
+    target_object: str, batch_iterator: Iterator[dict], destination_parameters: str
 ):
     first_batch = next(batch_iterator)
     if first_batch:

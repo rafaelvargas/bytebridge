@@ -61,10 +61,11 @@ Coming soon.
 
 ### Currently Supported
 
-| Name             | Type          | Client                                           |
-|----------------- | --------------|--------------------------------------------------|
-| PostgreSQL       | Database      | [psycopg](https://pypi.org/project/psycopg/)     |
-| Parquet          | File          | [pyarrow](https://pypi.org/project/pyarrow/)     |
+| Name             | Type          | Client                                                                         |
+|----------------- | --------------|--------------------------------------------------------------------------------|
+| PostgreSQL       | Database      | [psycopg](https://pypi.org/project/psycopg/)                                   |
+| MySQL            | Database      | [mysql-connector-python](https://pypi.org/project/mysql-connector-python/)     |
+| Parquet          | File          | [pyarrow](https://pypi.org/project/pyarrow/)                                   |
 
 
 
