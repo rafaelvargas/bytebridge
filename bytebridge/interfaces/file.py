@@ -1,14 +1,26 @@
-from typing import Iterator
+from typing import Iterator, List
 
 import pyarrow
 from pyarrow import parquet
 
 
-def load(*, filepath: str, batch_iterator: Iterator[dict]):
+def fetch(
+    *,
+    source_object: str,
+    query: str,
+    batch_size: int,
+    source_parameters: dict = None,
+) -> Iterator[List[dict]]:
+    parquet_file = parquet.ParquetFile(source_object)
+    for batch in parquet_file.iter_batches(batch_size=batch_size):
+        yield batch.to_pylist()
+
+
+def load(*, target: str, batch_iterator: Iterator[dict], destination_parameters: str):
     first_batch = next(batch_iterator)
     if first_batch:
         record_batch = pyarrow.RecordBatch.from_pylist(first_batch)
-        with parquet.ParquetWriter(filepath, record_batch.schema) as writer:
+        with parquet.ParquetWriter(target, record_batch.schema) as writer:
             writer.write_batch(record_batch)
             for batch in batch_iterator:
                 writer.write_batch(batch=pyarrow.RecordBatch.from_pylist(batch))
