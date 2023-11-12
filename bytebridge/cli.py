@@ -6,10 +6,10 @@ from .parsers import parse_json_file
 
 def _execute_transfer_operation(args: argparse.Namespace) -> None:
     source_parameters = parse_json_file(args.source)
-    destination_parameters = parse_json_file(args.destination)
+    destination_parameters = parse_json_file(args.target)
     source_object = args.source_object
-    query = args.query
-    target = args.target
+    query = args.source_query
+    target = args.target_object
     batch_size = args.batch_size
     transfer(
         source_parameters=source_parameters,
@@ -28,9 +28,9 @@ def main():
     transfer_parser = subparsers.add_parser("transfer", help="Transfer data operation")
     transfer_parser.add_argument("--source", required=True, help="Source parameters")
     transfer_parser.add_argument(
-        "--query",
+        "--source-query",
         required=False,
-        help="The query to be used to fetch data from the source.",
+        help="The query to be used to extract data from the source.",
     )
     transfer_parser.add_argument(
         "--source-object",
@@ -38,14 +38,14 @@ def main():
         help="The object from the source (table name or filepath) used to extract data.",
     )
     transfer_parser.add_argument(
-        "--destination",
+        "--target",
         required=True,
         help="Destination parameters",
     )
     transfer_parser.add_argument(
-        "--target",
+        "--target-object",
         required=True,
-        help="The target of the destination (can be a table or a filepath)",
+        help="The target of the destination (a table name or a filepath)",
     )
     transfer_parser.add_argument(
         "--batch-size",

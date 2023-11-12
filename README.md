@@ -9,17 +9,18 @@
     <em>A data tool designed to move data seamlessly between various sources and destinations.</em>
 </p>
 
-## Command Line Interface
+## CLI
 
+Bytebridge aims to have a CLI that can be used to easily transfer data from multiple sources. Some examples are shown below:
 
-### Extracting using SQL queries
+### Parquet to PostgreSQL
 
 ```bash
 bytebridge transfer 
-    --source postgres 
-    --query extraction_query.sql 
-    --destination parquet 
-    --map "ColumnA:column_a,ColumnB:column_b" 
+    --source source.json  
+    --source-object data.parquet
+    --target destination.json
+    --target-object bytebridge.public.data
 ```
 
 
