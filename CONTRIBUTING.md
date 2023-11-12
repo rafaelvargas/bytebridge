@@ -36,3 +36,8 @@ pip install --upgrade pip
 ```
 pip install -e '.[dev]'
 ```
+
+### Install the git hook scripts
+```
+pre-commit install
+```
