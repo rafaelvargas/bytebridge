@@ -16,7 +16,9 @@ def fetch(
         yield batch.to_pylist()
 
 
-def load(*, target_object: str, batch_iterator: Iterator[dict], destination_parameters: str):
+def load(
+    *, target_object: str, batch_iterator: Iterator[dict], destination_parameters: str
+):
     first_batch = next(batch_iterator)
     if first_batch:
         record_batch = pyarrow.RecordBatch.from_pylist(first_batch)
