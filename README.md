@@ -23,6 +23,35 @@ bytebridge transfer \
     --target postgresql_conn \
     --target-object bytebridge.public.data
 ```
+### PostgreSQL to Parquet
+
+```bash
+bytebridge transfer \
+    --connections connections.json \
+    --source postgresql_conn \
+    --source-object bytebridge.public.data \
+    --target postgresql_conn \
+    --target-object data.parquet
+```
+
+In both cases, the connections metadata are defined in the `connections.json` file. An example of the file definition is:
+
+```json
+{
+    "parquet_conn": {
+        "type": "parquet"
+    },
+    "postgresql_conn": {
+        "type": "postgresql",
+        "parameters": {
+            "host": "[hostname_of_the_connection]",
+            "user": "[postgresql_username_to_be_used]",
+            "password": "[postgresql_password_to_be_used]"
+        }
+    }
+}
+```
+
 
 ## API
 

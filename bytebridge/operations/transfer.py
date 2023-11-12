@@ -4,8 +4,8 @@ from ..interfaces.file import fetch as file_fetch
 from ..interfaces.file import load as file_load
 
 INTERFACES = {
-    "database": {"source": db_fetch, "destination": db_load},
-    "file": {"source": file_fetch, "destination": file_load},
+    "postgresql": {"source": db_fetch, "destination": db_load},
+    "parquet": {"source": file_fetch, "destination": file_load},
 }
 
 
