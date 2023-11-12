@@ -20,12 +20,16 @@ def _generate_list_of_tuples_from_list_of_dictionaries(list: dict):
 
 def fetch(
     *,
-    source_object: str = None,
-    query: str,
+    source_object: str,
+    source_query: str,
     batch_size: int,
     source_parameters: dict,
 ) -> Iterator[List[dict]]:
-    sql = parse_query_parameter(query)
+    if source_query:
+        sql = parse_query_parameter(source_query)
+    else:
+        sql = f"SELECT * FROM {source_object};"
+
     with closing(
         psycopg.connect(
             host=source_parameters["host"],
@@ -45,8 +49,8 @@ def fetch(
 
 def load(
     *,
-    target: str,
     batch_iterator: Iterator[List[dict]],
+    target_object: str,
     destination_parameters: dict,
 ) -> None:
     batch = next(batch_iterator)
@@ -62,7 +66,7 @@ def load(
         ) as connection:
             with closing(connection.cursor()) as cursor:
                 sql = _generate_insert_statement(
-                    target_table=target,
+                    target_table=target_object,
                     column_names=column_names,
                 )
                 cursor.executemany(

@@ -7,17 +7,17 @@ from .parsers import parse_json_file
 def _execute_transfer_operation(args: argparse.Namespace) -> None:
     connections = parse_json_file(args.connections)
     source_connection = connections[args.source]
-    target_connection = connections[args.target]
     source_object = args.source_object
-    query = args.source_query
-    target = args.target_object
+    source_query = args.source_query
+    target_connection = connections[args.target]
+    target_object = args.target_object
     batch_size = args.batch_size
     transfer(
         source_connection=source_connection,
         source_object=source_object,
-        query=query,
+        source_query=source_query,
         destination_connection=target_connection,
-        target=target,
+        target_object=target_object,
         batch_size=batch_size,
     )
 

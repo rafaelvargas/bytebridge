@@ -7,7 +7,7 @@ from pyarrow import parquet
 def fetch(
     *,
     source_object: str,
-    query: str,
+    source_query: str,
     batch_size: int,
     source_parameters: dict = None,
 ) -> Iterator[List[dict]]:
@@ -16,11 +16,11 @@ def fetch(
         yield batch.to_pylist()
 
 
-def load(*, target: str, batch_iterator: Iterator[dict], destination_parameters: str):
+def load(*, target_object: str, batch_iterator: Iterator[dict], destination_parameters: str):
     first_batch = next(batch_iterator)
     if first_batch:
         record_batch = pyarrow.RecordBatch.from_pylist(first_batch)
-        with parquet.ParquetWriter(target, record_batch.schema) as writer:
+        with parquet.ParquetWriter(target_object, record_batch.schema) as writer:
             writer.write_batch(record_batch)
             for batch in batch_iterator:
                 writer.write_batch(batch=pyarrow.RecordBatch.from_pylist(batch))

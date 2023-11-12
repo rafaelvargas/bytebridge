@@ -11,21 +11,21 @@ INTERFACES = {
 
 def transfer(
     *,
-    query: str,
+    source_query: str,
     source_object: str,
     source_connection,
     batch_size: int,
-    target: str,
+    target_object: str,
     destination_connection,
 ):
     batch_iterator = INTERFACES[source_connection["type"]]["source"](
-        query=query,
+        source_query=source_query,
         source_object=source_object,
         batch_size=batch_size,
         source_parameters=source_connection.get("parameters"),
     )
     INTERFACES[destination_connection["type"]]["destination"](
-        destination_parameters=destination_connection.get("parameters"),
-        target=target,
         batch_iterator=batch_iterator,
+        target_object=target_object,
+        destination_parameters=destination_connection.get("parameters"),
     )
