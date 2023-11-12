@@ -9,7 +9,7 @@ from ..parsers import parse_query_parameter
 
 CONNECTION_TYPES = {
     "postgresql": (psycopg.connect, {"row_factory": dict_row}),
-    "mysql": (mysql.connector.connect, {"dictionary": True})
+    "mysql": (mysql.connector.connect, {"dictionary": True}),
 }
 
 
@@ -23,10 +23,12 @@ def _generate_insert_statement(target_table: str, column_names: List[str]):
 def _generate_list_of_tuples_from_list_of_dictionaries(list: dict):
     return [tuple(value.values()) for value in list]
 
+
 def _get_connection_with_cursor_params(connection_type: str) -> Callable:
     if connection_type not in CONNECTION_TYPES:
         raise ValueError("Unsupported connection type")
     return CONNECTION_TYPES[connection_type]
+
 
 def fetch(
     *,
