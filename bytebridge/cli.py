@@ -1,6 +1,6 @@
 import argparse
 
-from .operations.transfer import transfer
+from .operations import transfer
 from .parsers import parse_json_file
 
 

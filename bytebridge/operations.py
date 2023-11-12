@@ -1,7 +1,7 @@
-from ..interfaces.database import fetch as db_fetch
-from ..interfaces.database import load as db_load
-from ..interfaces.file import fetch as file_fetch
-from ..interfaces.file import load as file_load
+from .interfaces.database import fetch as db_fetch
+from .interfaces.database import load as db_load
+from .interfaces.file import fetch as file_fetch
+from .interfaces.file import load as file_load
 
 INTERFACES = {
     "postgresql": {"source": db_fetch, "destination": db_load},
