@@ -1,34 +1,43 @@
-from .interfaces.database import fetch as db_fetch
-from .interfaces.database import load as db_load
-from .interfaces.file import fetch as file_fetch
-from .interfaces.file import load as file_load
+from typing import Union
 
-INTERFACES = {
-    "postgresql": {"source": db_fetch, "destination": db_load},
-    "mysql": {"source": db_fetch, "destination": db_load},
-    "parquet": {"source": file_fetch, "destination": file_load},
-}
+from .connectors.database import MySqlConnector, PostgresConnector
+from .connectors.file import ParquetConnector
+
+
+def _get_connector(
+    connector_type: str
+) -> Union[PostgresConnector, MySqlConnector, ParquetConnector]:
+    supported_connectors = {
+        "postgresql": PostgresConnector,
+        "mysql": MySqlConnector,
+        "parquet": ParquetConnector,
+    }
+    if connector_type not in supported_connectors:
+        raise ValueError(f"The connector {connector_type} is not supported.")
+    return supported_connectors[connector_type]
 
 
 def transfer(
     *,
     source_query: str,
     source_object: str,
-    source_connection,
+    source_connection: dict,
     batch_size: int,
     target_object: str,
-    destination_connection,
+    destination_connection: dict,
 ):
-    batch_iterator = INTERFACES[source_connection["type"]]["source"](
-        connection_type=source_connection["type"],
+    source_connector = _get_connector(source_connection["type"])(
+        connection_parameters=source_connection.get("parameters"),
+    )
+    destination_connector = _get_connector(destination_connection["type"])(
+        connection_parameters=destination_connection.get("parameters"),
+    )
+    batch_iterator = source_connector.extract(
         source_query=source_query,
         source_object=source_object,
         batch_size=batch_size,
-        source_parameters=source_connection.get("parameters"),
     )
-    INTERFACES[destination_connection["type"]]["destination"](
-        connection_type=destination_connection["type"],
+    destination_connector.load(
         batch_iterator=batch_iterator,
         target_object=target_object,
-        destination_parameters=destination_connection.get("parameters"),
     )

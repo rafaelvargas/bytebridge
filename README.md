@@ -57,7 +57,7 @@ In both cases, the connections metadata are defined in the `connections.json` fi
 
 Coming soon.
 
-## Data Interfaces
+## Data Connectors
 
 ### Currently Supported
 
@@ -73,12 +73,10 @@ Coming soon.
 
 | Name             | Type          |
 |----------------- | --------------|
-| MySQL            | Database      |
 | SQLite           | Database      |
 | SQL Server       | Database      |
 | Oracle           | Database      |
 | Clickhouse       | Database      |
-| Parquet          | File          |
 | CSV              | File          |
 | ORC              | File          |
 | Avro             | File          |
