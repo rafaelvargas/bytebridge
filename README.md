@@ -1,13 +1,19 @@
 
 
-
 <p align="center" style="padding: 20px">
   <img src="static/branding/logo.svg" style="width:450px" alt="bytebridge">
 </p>
 
-<p align="center" style="padding-bottom: 20px">
+<p align="center">
     <em>A data tool designed to move data seamlessly between various sources and destinations.</em>
 </p>
+
+<p align="center">
+    <a href="https://pypi.org/project/bytebridge" target="_blank">
+        <img src="https://img.shields.io/pypi/v/bytebridge?" alt="Package version">
+    </a>
+</p>
+
 
 ## CLI
 
