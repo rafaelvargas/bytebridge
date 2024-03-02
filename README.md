@@ -52,7 +52,8 @@ In both cases, the connections metadata are defined in the `connections.json` fi
         "parameters": {
             "host": "[hostname_of_the_connection]",
             "user": "[postgresql_username_to_be_used]",
-            "password": "[postgresql_password_to_be_used]"
+            "password": "[postgresql_password_to_be_used]",
+            "port": "[postgresql_port_to_be_used]",
         }
     }
 }
@@ -71,6 +72,7 @@ Coming soon.
 |----------------- | --------------|--------------------------------------------------------------------------------|
 | PostgreSQL       | Database      | [psycopg](https://pypi.org/project/psycopg/)                                   |
 | MySQL            | Database      | [mysql-connector-python](https://pypi.org/project/mysql-connector-python/)     |
+| MS SQL Server    | Database      | [pymssql](https://pypi.org/project/pymssql/)                                   |
 | Parquet          | File          | [pyarrow](https://pypi.org/project/pyarrow/)                                   |
 
 
@@ -80,13 +82,17 @@ Coming soon.
 | Name             | Type          |
 |----------------- | --------------|
 | SQLite           | Database      |
-| SQL Server       | Database      |
-| Oracle           | Database      |
+| MongoDB          | Database      |
+| MariaDB          | Database      |
 | Clickhouse       | Database      |
+| BigQuery         | Database      |
+| Oracle           | Database      |
+| Cassandra        | Database      |
 | CSV              | File          |
 | ORC              | File          |
 | Avro             | File          |
 | Excel (XLSX)     | File          |
+| JSON             | File          |
 
 
 

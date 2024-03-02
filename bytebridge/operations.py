@@ -1,6 +1,6 @@
 from typing import Union
 
-from .connectors.database import MySqlConnector, PostgresConnector
+from .connectors.database import MySqlConnector, PostgresConnector, MsSqlConnector
 from .connectors.file import ParquetConnector
 
 
@@ -11,6 +11,7 @@ def _get_connector(
         "postgresql": PostgresConnector,
         "mysql": MySqlConnector,
         "parquet": ParquetConnector,
+        "mssql": MsSqlConnector,
     }
     if connector_type not in supported_connectors:
         raise ValueError(f"The connector {connector_type} is not supported.")
