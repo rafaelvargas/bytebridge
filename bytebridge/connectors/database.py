@@ -4,6 +4,7 @@ from typing import Callable, Dict, Iterator, List
 import mysql.connector
 import psycopg
 from psycopg.rows import dict_row
+import pymssql
 
 from .base import Connector
 
@@ -34,6 +35,7 @@ class DatabaseConnector(Connector):
                 host=self._connection_parameters["host"],
                 user=self._connection_parameters["user"],
                 password=self._connection_parameters["password"],
+                port=self._connection_parameters["port"],
             ),
         ) as connection:
             with closing(connection.cursor(**self._cursor_parameters)) as cursor:
@@ -58,6 +60,7 @@ class DatabaseConnector(Connector):
                     host=self._connection_parameters["host"],
                     user=self._connection_parameters["user"],
                     password=self._connection_parameters["password"],
+                    port=self._connection_parameters["port"],
                     autocommit=True,
                 ),
             ) as connection:
@@ -110,4 +113,11 @@ class MySqlConnector(DatabaseConnector):
     def __init__(self, *, connection_parameters: dict) -> None:
         self._connection_handler = mysql.connector.connect
         self._cursor_parameters = {"dictionary": True}
+        self._connection_parameters = connection_parameters
+
+
+class MsSqlConnector(DatabaseConnector):
+    def __init__(self, *, connection_parameters: dict) -> None:
+        self._connection_handler = pymssql.connect
+        self._cursor_parameters = {"as_dict": True}
         self._connection_parameters = connection_parameters

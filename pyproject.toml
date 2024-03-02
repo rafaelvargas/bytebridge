@@ -15,6 +15,7 @@ dependencies = [
     "psycopg[binary] >=3.0.9",
     "pyarrow >=7.0.0",
     "mysql-connector-python >=8.0.19",
+    "pymssql >=2.2.11", 
 ]
 
 
