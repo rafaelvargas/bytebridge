@@ -74,6 +74,7 @@ Coming soon.
 | MySQL            | Database      | [mysql-connector-python](https://pypi.org/project/mysql-connector-python/)     |
 | MS SQL Server    | Database      | [pymssql](https://pypi.org/project/pymssql/)                                   |
 | Parquet          | File          | [pyarrow](https://pypi.org/project/pyarrow/)                                   |
+| CSV              | File          | [csv](https://docs.python.org/3/library/csv.html)                              |
 
 
 
@@ -88,7 +89,6 @@ Coming soon.
 | BigQuery         | Database      |
 | Oracle           | Database      |
 | Cassandra        | Database      |
-| CSV              | File          |
 | ORC              | File          |
 | Avro             | File          |
 | Excel (XLSX)     | File          |
