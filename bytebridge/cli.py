@@ -60,6 +60,7 @@ def main():
         "--batch-size",
         required=False,
         default=100,
+        type=int,
         help="The size of batches used during the data transfer.",
     )
     args = parser.parse_args()
