@@ -1,17 +1,20 @@
 from typing import Union
 
 from .connectors.database import MySqlConnector, PostgresConnector, MsSqlConnector
-from .connectors.file import ParquetConnector
+from .connectors.file import ParquetConnector, CsvConnector
 
 
 def _get_connector(
     connector_type: str
-) -> Union[PostgresConnector, MySqlConnector, ParquetConnector]:
+) -> Union[
+    PostgresConnector, MySqlConnector, ParquetConnector, MsSqlConnector, CsvConnector
+]:
     supported_connectors = {
         "postgresql": PostgresConnector,
         "mysql": MySqlConnector,
         "parquet": ParquetConnector,
         "mssql": MsSqlConnector,
+        "csv": CsvConnector,
     }
     if connector_type not in supported_connectors:
         raise ValueError(f"The connector {connector_type} is not supported.")
@@ -31,7 +34,7 @@ def transfer(
         connection_parameters=source_connection.get("parameters"),
     )
     destination_connector = _get_connector(destination_connection["type"])(
-        connection_parameters=destination_connection.get("parameters"),
+        connection_parameters=destination_connection.get("parameters", {}),
     )
     batch_iterator = source_connector.extract(
         source_query=source_query,
